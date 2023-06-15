@@ -9,7 +9,25 @@
 */
 
 function calculateTotalSpentByCategory(transactions) {
-  return [];
+	var categories_arr = [];
+	transactions.map((trans) => {
+		if (!categories_arr.includes(trans['category'])) {
+			categories_arr.push(trans['category']);
+		}
+	});
+
+	var finla_arr = [];
+	categories_arr.map((category) => {
+		let totalSpent = 0;
+		transactions.map((trans) => {
+			if (trans['category'] === category) {
+				totalSpent += trans['price'];
+			}
+		});
+		finla_arr.push({ category, totalSpent });
+	});
+
+	return finla_arr;
 }
 
 module.exports = calculateTotalSpentByCategory;
